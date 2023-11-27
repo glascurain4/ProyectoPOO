@@ -29,7 +29,6 @@ int main() {
 //Creamos objetos y los ponemos a prueba con sus métodos
     Avion miAvion("A121", "MEX", "N/A", "Embraer E190", "Aeromexico", 100, true);
     Vuelo miVuelo("A122", "MEX", "DFW", "", "0:00", "A1");
-    miVuelo.setAvion(miAvion.getId() + " - " + miAvion.getModelo());
     Pasajero miPasajero;
     miPasajero.setOrigen(miVuelo.getOrigen());
     miPasajero.setDestino(miVuelo.getDestino());
@@ -38,6 +37,7 @@ int main() {
     miVuelo.imprimeDatos();
     miPasajero.imprimeDatos();
 
+    miVuelo.setAvion(miAvion.getId() + " - " + miAvion.getModelo());
     miVuelo.retrasarVuelo();
 
     miPasajero.llamarPasajero();
