@@ -1,93 +1,79 @@
+#ifndef PASAJERO_H
+#define PASAJERO_H
+
 #include <iostream>
 #include <string>
+#include <vector>
 #include <ctime>
 
+#include "Movil.h"
+#include "Avion.h"
+
 using namespace std;
+
+class Vuelo;
 
 /*
 ------------------P A S A J E R O-----------------
 */
 
 
-class Pasajero {
+class Pasajero : public Movil {
 
   private:
   string nombre;
-  int num_vuelo;
-  string destino;
+  vector<Vuelo*> vuelos;
   string salida;
 
   public:
 //Constructores
-  Pasajero();
-  Pasajero(string nom, int numv, string des, string sal);
+  Pasajero() {
+    nombre = "Pancho López";
+    salida = "A1";
+  }
+
+  Pasajero(string _id, string _origen, string _destino, string _nombre, string _salida) : Movil(_id, _origen, _destino) {
+    nombre = _nombre;
+    salida = _salida;
+  }
 
 //Getters
-  string getNombre();
-  int getNumVuelo();
-  string getDestino();
-  string getSalida();
+  string getNombre() {
+    return nombre;
+  }
+  vector<Vuelo*> getVuelos() {
+    return vuelos;
+  }
+  string getSalida() {
+    return salida;
+  }
 
 //Setters
-  void setNombre(string nom);
-  void setNumVuelo(int numv);
-  void setDestino(string des);
-  void setSalida(string sal);
+  void setNombre(string _nombre) {
+    nombre = _nombre;
+  }
+  void AgregarVuelo(Vuelo* vuelo) {
+    vuelos.push_back(vuelo);
+  }
+  void setSalida(string _salida) {
+    salida = _salida;
+  }
 
 //Métodos
-  void imprimeDatos();
-  void llamarPasajero();
+  void imprimeDatos() {
+
+    cout << "--------------------------------" << endl;
+    
+    cout << "Nombre: " << nombre << endl;
+    
+    Movil::ImprimeDatos();
+
+    cout << "Salida: " << salida << endl;
+  }
+  void llamarPasajero() {
+     cout << "--------------------------------" << endl;
+    cout << nombre << " con destino a " << destino << " favor de presentarse en salida " << salida << endl;
+  }
 };
 
-//Constructores ::Pasajero
-Pasajero::Pasajero() {
-  nombre = "Pancho López";
-  num_vuelo = 1909;
-  destino = "México";
-  salida = "A1";
-}
-Pasajero::Pasajero(string nom, int numv, string des, string sal) {
-  nombre = nom;
-  num_vuelo = numv;
-  destino = des;
-  salida = sal;
-}
-
-// Getters ::Pasajero
-string Pasajero::getNombre() {
-  return nombre;
-}
-
-int Pasajero::getNumVuelo() {
-  return num_vuelo;
-}
-
-string Pasajero::getDestino() {
-  return destino;
-}
-
-//Setters ::Pasajero
-void Pasajero::setNombre(string nom) {
-  nombre = nom;
-}
-void Pasajero::setNumVuelo(int numv) {
-  num_vuelo = numv;
-}
-void Pasajero::setDestino(string des) {
-  destino = des;
-}
-void Pasajero::setSalida(string sal) {
-  salida = sal;
-}
-
-
-//Metodos ::Pasajero
-void Pasajero::imprimeDatos() {
-  cout << "Nombre: " << nombre << endl;
-  cout << "Número de vuelo: " << num_vuelo << endl;
-  cout << "Destino: " << destino << endl;
-  cout << "Salida: " << salida << endl;
-}
-void Pasajero::llamarPasajero() {
-  cout << nombre << " con destino a " << destino << ", del vuelo " << num_vuelo << " favor de presentarse en salida " << salida << endl;
-}
+#endif

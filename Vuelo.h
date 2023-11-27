@@ -1,94 +1,88 @@
+#ifndef VUELO_H
+#define VUELO_H
+
 #include <iostream>
 #include <string>
 #include <ctime>
 
+#include "Movil.h"
+
 using namespace std;
+
+class Pasajero;
 
 /*
 -----------------------V U E L O------------------------
 */
 
-class Vuelo {
+class Vuelo : public Movil {
   private:
-  string origen;
+  string avion;
+  vector<Pasajero*> pasajeros;
   string hora_salida;
-  string destino;
   string salida;
 
   public:
 //Constructores
-  Vuelo();
-  Vuelo(string ori, string hora, string des, string sal);
+  Vuelo() {
+    avion = "A123 - Embraer E190";
+    hora_salida = "0:00";
+    salida = "A1";
+  }
+  Vuelo(string _id, string _origen, string _destino, string _avion, string _hora_salida, string _salida) : Movil(_id, _origen, _destino) {
+    avion = _avion;
+    hora_salida = _hora_salida;
+    salida = _salida;
+  }
 //Getters
-  string getOrigen();
-  string getHoraSalida();
-  string getDestino();
-  string getSalida();
+  string getAvion() {
+    return avion;
+  }
+  string getHoraSalida() {
+    return hora_salida;
+  }
+  vector<Pasajero*> getPasajeros() {
+    return pasajeros;
+  }
+  string getSalida() {
+    return salida;
+  }
 //Setters
-  void setOrigen(string ori);
-  void setHoraSalida(string hora);
-  void setDestino(string des);
-  void setSalida(string sal);
+  void setAvion(string _avion) {
+    avion = _avion;
+  }
+  void setHoraSalida(string _hora_salida) {
+    hora_salida = _hora_salida;
+  }
+
+  void setSalida(string _salida) {
+    salida = _salida;
+  }
+  void AgregarPasajero(Pasajero* pasajero) {
+    pasajeros.push_back(pasajero);
+  }
 //Metodos
-  void imprimeDatos();
-  void retrasarVuelo();
-};
+void imprimeDatos() {
 
-//Constructores ::Vuelo
-Vuelo::Vuelo() {
-  origen = "MEX";
-  hora_salida = "0:00";
-  destino = "MEX";
-  salida = "A12";
-}
-Vuelo::Vuelo(string ori, string hora, string des, string sal) {
-  origen = ori;
-  hora_salida = hora;
-  destino = des;
-  salida = sal;
-}
+  cout << "--------------------------------" << endl;
 
-// Getters ::Vuelo
-string Vuelo::getOrigen() {
-  return origen;
-}
+  Movil::ImprimeDatos();
 
-string Vuelo::getHoraSalida() {
-  return hora_salida;
-}
+  cout << "Avion: " << avion << endl;
 
-string Vuelo::getDestino() {
-  return destino;
-}
-string Vuelo::getSalida() {
-  return salida;
-}
+  cout << "Horario de salida: " << hora_salida << " hrs" << endl;
 
-//Setters ::Vuelo
-void Vuelo::setOrigen(string ori) {
-  origen = ori;
-}
-void Vuelo::setHoraSalida(string hora) {
-  hora_salida = hora;
-}
-void Vuelo::setDestino(string des) {
-  destino = des;
-}
-void Vuelo::setSalida(string sal) {
-  salida = sal;
-}
-
-//Metodos ::Vuelo
-void Vuelo::imprimeDatos() {
-  cout << "Origen: " << origen << endl;
-  cout << "Hora de salida " << hora_salida << " hrs" << endl;
-  cout << "Destino: " << destino << endl;
   cout << "Salida: " << salida << endl;
 }
-void Vuelo::retrasarVuelo() {
-  string n_hora;
-  cout << "Ingrese nuevo horario para vuelo " << origen << "-" << destino << " " << hora_salida << endl;
-  cin >> n_hora;
-  hora_salida = n_hora;
-  cout << "Se ha actualizado el horario de salida para el vuelo " << origen << "-" << destino << " para las " << n_hora << " hrs" << endl;
-}
+
+  void retrasarVuelo() {
+    string n_hora;
+    cout << "Ingrese nuevo horario para vuelo " << origen << "-" << destino << " " << hora_salida << endl;
+    cin >> n_hora;
+    hora_salida = n_hora;
+    cout << "Se ha actualizado el horario de salida para el vuelo " << origen << "-" << destino << " para las " << n_hora << " hrs" << endl;
+    Vuelo::imprimeDatos();
+  }
+};
+
+#endif
