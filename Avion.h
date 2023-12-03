@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class Vuelo;
+class Vuelo; //Definimoa parcialmente las clases para evitar errores cíclicos
 class Pasajero;
 /*
 ----------------------A V I O N------------------------
@@ -31,9 +31,9 @@ class Avion : public Movil {
   public:
 //Constructores
   Avion() : Movil() {
-    modelo = "Embraer E190";
-    aerolinea = "Aeromexico";
-    capacidad = 100;
+    modelo = "";
+    aerolinea = "";
+    capacidad = 0;
     disponibilidad = false;
   }
 
@@ -74,25 +74,28 @@ vector<Pasajero*> getPasajeros() {
   void setCapacidad(int _capacidad) {
     capacidad = _capacidad;
   }
+  void setDisponibilidad(bool _disponibilidad) {
+  disponibilidad = _disponibilidad;
+}
+//No son nesesarios los setters para vuelos y pasajeros ya que utilizamos los metodos para agregarlos
+
+
+//Métodos
   void AgregarVuelo(Vuelo* vuelo) {
     vuelos.push_back(vuelo);
   }
   void AgregarPasajero(Pasajero* pasajero) {
     pasajeros.push_back(pasajero);
   }
-  void setDisponibilidad(bool _disponibilidad) {
-    disponibilidad = _disponibilidad;
-  }
-//Métodos
   void imprimeDatos() {
     
-    if (destino != "N/A") {
-      disponibilidad = false;}
+    if (destino != "") {
+      disponibilidad = false;} //Convertimos el booleano a string para desplegar
     
     cout << "--------------------------------" << endl;
     cout << "Modelo: " << modelo << endl;
     cout << "Aerolinea: " << aerolinea << endl;
-    Movil::ImprimeDatos();
+    ImprimeDatos(); //Reutilizamos método de clase padre
     cout << "Capacidad: " << capacidad << " pasajeros" << endl;
     if (disponibilidad == true) {
       cout << "Disponibilidad: " << "Si";

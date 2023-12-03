@@ -10,43 +10,30 @@
 
 using namespace std;
 int main() {
-  // Creamos la interfaz del usuario
-  string usuario = "A01707236";
-  string contrasenia = "Contraseña";
-  string input_usuario;
-  string input_contrasenia;
   cout << "----------------AEROPUERTO----------------" << endl;
   cout << endl;
-  cout << "Introduzca usuario: " << endl;
-  cin >> input_usuario;
-  cout << "Introduzca contraseña: " << endl;
-  cin >> input_contrasenia;
-  if (input_contrasenia == contrasenia && input_usuario == usuario) {
-    cout << endl;
-    cout << "Bienvenido " << input_usuario << endl;
-    cout << endl;
     cout << "Base de datos: " << endl;
-//Creamos objetos y los ponemos a prueba con sus métodos
-    Avion miAvion("A121", "MEX", "N/A", "Embraer E190", "Aeromexico", 100, true);
+//Creamos objetos con constructores
+    Avion miAvion("A121", "MEX", "", "Embraer E190", "Aeromexico", 100, true);
     Vuelo miVuelo("A122", "MEX", "DFW", "", "0:00", "A1");
     Pasajero miPasajero;
-    miPasajero.setOrigen(miVuelo.getOrigen());
+  
+    miPasajero.setOrigen(miVuelo.getOrigen()); //Asignamos los datos de nuestro vuelo al pasajero
     miPasajero.setDestino(miVuelo.getDestino());
-    
+    miPasajero.setSalida(miVuelo.getSalida());
+
+  //Imprimimos los datos de nuestros objetos creados
     miAvion.imprimeDatos();
     miVuelo.imprimeDatos();
     miPasajero.imprimeDatos();
 
-    miVuelo.setAvion(miAvion.getId() + " - " + miAvion.getModelo());
-    miVuelo.retrasarVuelo();
+    miVuelo.setAvion(miAvion.getId() + " - " + miAvion.getModelo()); //Asignamos datos del avion a nuestro vuelo
+    miVuelo.retrasarVuelo(); //Probamos funcion de Vuelo y vemos los cambios creados
 
-    miPasajero.llamarPasajero();
+    miPasajero.llamarPasajero(); //Probamos funcion de pasajero
 
     miAvion.setDestino(miVuelo.getDestino());
-    miAvion.imprimeDatos();
-  }
-  else {
-    cout << "Usuario y/o contraseña incorrectos" << endl;
-  }
+    miAvion.imprimeDatos(); //Asignamos datos del vuelo al avion y imprimimos datos para ver los cambios
+
   return 0;
 }

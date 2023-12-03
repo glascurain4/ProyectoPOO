@@ -29,7 +29,7 @@ class Pasajero : public Movil {
 //Constructores
   Pasajero() {
     nombre = "Pancho López";
-    salida = "A1";
+    salida = "";
   }
 
   Pasajero(string _id, string _origen, string _destino, string _nombre, string _salida) : Movil(_id, _origen, _destino) {
@@ -52,21 +52,22 @@ class Pasajero : public Movil {
   void setNombre(string _nombre) {
     nombre = _nombre;
   }
-  void AgregarVuelo(Vuelo* vuelo) {
-    vuelos.push_back(vuelo);
-  }
   void setSalida(string _salida) {
     salida = _salida;
   }
+//No es necesario el setVuelos
 
 //Métodos
+  void AgregarVuelo(Vuelo* vuelo) {
+  vuelos.push_back(vuelo); 
+  }
   void imprimeDatos() {
 
     cout << "--------------------------------" << endl;
     
     cout << "Nombre: " << nombre << endl;
     
-    Movil::ImprimeDatos();
+    ImprimeDatos(); //Reutilizamos método de la clase padre
 
     cout << "Salida: " << salida << endl;
   }

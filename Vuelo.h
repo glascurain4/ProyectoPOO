@@ -25,9 +25,9 @@ class Vuelo : public Movil {
   public:
 //Constructores
   Vuelo() {
-    avion = "A123 - Embraer E190";
-    hora_salida = "0:00";
-    salida = "A1";
+    avion = "";
+    hora_salida = "";
+    salida = "";
   }
   Vuelo(string _id, string _origen, string _destino, string _avion, string _hora_salida, string _salida) : Movil(_id, _origen, _destino) {
     avion = _avion;
@@ -58,15 +58,17 @@ class Vuelo : public Movil {
   void setSalida(string _salida) {
     salida = _salida;
   }
-  void AgregarPasajero(Pasajero* pasajero) {
-    pasajeros.push_back(pasajero);
-  }
+// No es necesario el setPasajeros
+
 //Metodos
+void AgregarPasajero(Pasajero* pasajero) {
+  pasajeros.push_back(pasajero);
+}
 void imprimeDatos() {
 
   cout << "--------------------------------" << endl;
 
-  Movil::ImprimeDatos();
+  ImprimeDatos(); //Reutilizamos método de la clase padre
 
   cout << "Avion: " << avion << endl;
 
@@ -81,7 +83,7 @@ void imprimeDatos() {
     cin >> n_hora;
     hora_salida = n_hora;
     cout << "Se ha actualizado el horario de salida para el vuelo " << origen << "-" << destino << " para las " << n_hora << " hrs" << endl;
-    Vuelo::imprimeDatos();
+    imprimeDatos(); //Reutilizamos método propio
   }
 };
 

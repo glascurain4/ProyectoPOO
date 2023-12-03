@@ -13,12 +13,14 @@ using namespace std;
 */
 
 class Movil {
-protected:
+protected: //Establecemos las variables que heredaremos a las demás clases
 string id;
 string origen;
 string destino;
 
 public:
+
+//Constructores
 Movil() {
   id = "A123";
   origen = "MEX";
@@ -30,6 +32,7 @@ Movil(string _id, string _origen, string _destino) {
  destino = _destino;
 }
 
+//Getters
 string getId() {
   return id;
 }
@@ -40,6 +43,7 @@ string getDestino() {
   return destino;
 }
 
+//Setters
 void setId(string _id) {
   id = _id;
 }
@@ -50,6 +54,7 @@ void setDestino(string _destino) {
   destino = _destino;
 }
 
+//Metodos (reutilizable en clases hijas)
 virtual void ImprimeDatos() {
   cout << "ID: " << id << endl;
   cout << "Origen: " << origen << endl;
